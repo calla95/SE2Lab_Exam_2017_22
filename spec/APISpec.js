@@ -188,3 +188,42 @@ describe("Test /searchSimilarDisk", function() {
 	});	
 	
 });
+
+
+// Test for /searchDisk
+describe("Test /searchDisk", function() {
+	
+	//set the data
+	var data = {
+			ID: '1',
+		};
+
+	
+	//legal request
+	it("to returns status code 200", function(done) {
+	  client.post(base_url + "searchDisk/", data, function(err, res, body) {
+		expect(body).toEqual([
+		{
+		ID: 1,
+       		price: 11,
+        	quantity: 20,
+		genre: "classic",
+		date: (2000, 0, 1, 0, 0, 0, 0) 
+		}]
+		);
+
+		done();
+	  });
+	});
+
+	//item non existing
+	data1 = {ID: "10" };
+	it("to returns status code 406", function(done) {
+	  client.post(base_url + "searchItem/", data1, function(err, res, body) {
+		expect(res.statusCode).toBe(404);
+		done();
+	  });
+	});
+	
+
+});
