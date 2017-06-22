@@ -164,6 +164,83 @@ app.post('/remasterDisk', function(request, response)
 
 });
 
+app.post('/sellDisk', function(request, response) 
+{
+	var headers = {};
+	headers["Access-Control-Allow-Origin"] = "*";
+	headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
+	headers["Access-Control-Allow-Credentials"] = false;
+	headers["Access-Control-Max-Age"] = '86400'; // 24 hours
+	headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept";
+	headers["Content-Type"] = "application/json";
+
+	var diskID;
+	
+	//check body and parameters
+	if ( typeof request.body !== 'undefined' && request.body)
+	{
+        
+        //diskID
+		if ( typeof request.body.ID !== 'undefined' && request.body.ID)
+			 diskID = parseFloat(request.body.ID);
+		else 
+			diskID = null;
+        
+		//search for disk
+		var disk = recordShop.searchDisk(diskID);
+		//if exists
+		if (disk != null)
+		{
+			response.writeHead(200, headers);
+			response.end(JSON.stringify(disk));
+		}
+		else
+		{
+			response.writeHead(404, headers);
+			response.end(JSON.stringify());
+		}
+	
+	}
+	
+	var itemSold;
+	
+	
+	if (diskID!=null )
+	{
+		//aceptable input
+		//delete sell an item
+		itemSold = shopManager.sellItem(diskID);
+		if (itemSold!= null)
+		{
+			response.writeHead(200, headers);
+			response.end(JSON.stringify(itemSold));
+		}
+		else
+		{
+			response.writeHead(404, headers);
+			response.end(JSON.stringify());
+		}
+
+	} 
+
+
+
+
+
+
+
+	else
+	{
+		//unaceptable input
+		response.writeHead(406, headers);
+		response.end(JSON.stringify("1"));
+	}
+    
+
+});
+
+
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });

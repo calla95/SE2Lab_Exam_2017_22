@@ -106,7 +106,36 @@ var remaster = function remaster(item)
         return null;
 }
 
+
+var sellItem = function sellItem(diskID)
+{
+    //search for the element, take the first one if more than one match
+    var position = searchPos(ID : itemID);
+	
+    //if is not found return null
+	if (position == null)
+    	return null;
+	else
+	{
+		if (disks[position].quantity>1)
+        {
+            //modify the stiorage quantity,and returns the item
+            disks[position].quantity = disks[position].quantity-1;
+            return disks[position];
+        }
+        else
+            //remove the item and return it
+            return disks.splice(position, 1)[0];
+	}
+}
+
 //export functions
 exports.getDisks = getDisks; 
 exports.searchDisk = searchDisk; 
 exports.remaster = remaster; 
+
+
+
+
+
+

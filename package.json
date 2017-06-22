@@ -1,0 +1,21 @@
+{
+  "name": "esame",
+  "version": "1.0.0",
+  "description": "servizio web per gestione si un sito e-commerce",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/calla95/SE2Lab_Exam_2017_22.git"
+  },
+  "author": "sara callaioli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/calla95/SE2Lab_Exam_2017_22/issues"
+  },
+  "homepage": "https://github.com/calla95/SE2Lab_Exam_2017_22#readme"
+"start": "node index.js"
+
+}
